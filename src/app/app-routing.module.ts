@@ -1,37 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { ProgressComponent } from './pages/progress/progress.component';
-import { GraficaComponent } from './pages/grafica/grafica.component';
-import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
-import { PagesComponent } from './pages/pages.component';
+
+//Modulos
+import { PagesRoutingModule } from './pages/pages.routing';
+import { AuthRoutingModule } from './auth/auth.routing';
+
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+
+
 
 
 const routes: Routes = [
-  {
-    path: '',
-     component:  PagesComponent,
-     children: [
-
-       {path:'dashboard', component: DashboardComponent},
-       {path:'progress', component: ProgressComponent},
-       {path:'grafica', component: GraficaComponent},
-       {path:'', redirectTo:'/dashboard', pathMatch: 'full'},
-     ]
-    },
-
-  {path:'register', component: RegisterComponent},
-  {path:'login', component: LoginComponent},
-
-  {path:'**', component: NopagefoundComponent},
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard', loadChildren:  () => import('./pages/pages.module').then(m => m.PagesModule)},
+  { path: '**', component: NopagefoundComponent },
 ]
 
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    PagesRoutingModule,
+    AuthRoutingModule
   ],
   exports:[RouterModule]
 })
