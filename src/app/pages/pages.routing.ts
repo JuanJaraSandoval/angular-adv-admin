@@ -6,6 +6,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { GraficaComponent } from './grafica/grafica.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 
@@ -13,16 +15,17 @@ const routes: Routes = [
 
   {
     path: 'dashboard',
-     component:  PagesComponent,
-     children: [
+    component: PagesComponent,
+    children: [
+      { path: '', component: DashboardComponent, data:{titulo: 'Dasboard'} },
+      { path: 'progress', component: ProgressComponent, data:{titulo: 'Progress'}  },
+      { path: 'grafica', component: GraficaComponent, data:{titulo: 'Grafica'}  },
+      { path: 'ajustes', component: AccountSettingsComponent, data:{titulo: 'Ajustes'}  },
+      { path: 'promesas', component: PromesasComponent,data:{titulo: 'Promesas'}  },
+      { path: 'rxjs', component: RxjsComponent, data:{titulo: 'Rxjs'}  }
 
-       {path:'', component: DashboardComponent},
-       {path:'progress', component: ProgressComponent},
-       {path:'grafica', component: GraficaComponent},
-       {path:'ajustes', component: AccountSettingsComponent},
-
-     ]
-    },
+    ]
+  },
 
 
 ];
@@ -31,4 +34,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PagesRoutingModule {}
+export class PagesRoutingModule { }
